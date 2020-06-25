@@ -1,5 +1,6 @@
 var limitWarningEl = document.querySelector("#limit-warning");
 var issueContainerEl = document.querySelector("#issues-container");
+var repoNameEl = document.querySelector("#repo-name");
 var getRepoIssues = function(repo) {
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
     fetch(apiUrl).then(function(response) {
@@ -71,3 +72,10 @@ var displayWarning = function(repo) {
     // append to warning container
     limitWarningEl.appendChild(linkEl);
     };
+
+var getRepoName = function() {
+  var queryString = document.location.search;
+  var repoName = queryString.split("=")[1];
+  getRepoIssues(repoName);
+  repoNameEl.textContent = repoName;
+}
